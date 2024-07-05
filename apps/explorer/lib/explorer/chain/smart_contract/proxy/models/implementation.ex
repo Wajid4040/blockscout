@@ -170,6 +170,12 @@ defmodule Explorer.Chain.SmartContract.Proxy.Models.Implementation do
     implementation_updated_at = implementation_updated_at || implementation_updated_at_from_db
 
     if fetch_implementation?(implementation_address_fetched?, refetch_necessity_checked?, implementation_updated_at) do
+      if Mix.env() == :test do
+        Logger.info(
+          "### fetch_implementation_address_hash call for address_hash: #{inspect(to_string(address_hash))} ###"
+        )
+      end
+
       get_implementation_address_hash_task =
         Task.async(fn ->
           result = Proxy.fetch_implementation_address_hash(address_hash, abi, options)

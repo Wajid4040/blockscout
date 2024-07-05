@@ -6,6 +6,8 @@ defmodule Explorer.Chain.SmartContract.Proxy.EIP1967 do
   alias Explorer.Chain.SmartContract.Proxy
   alias Explorer.Chain.SmartContract.Proxy.Basic
 
+  require Logger
+
   # supported signatures:
   # 5c60da1b = keccak256(implementation())
   @implementation_signature "5c60da1b"
@@ -41,6 +43,10 @@ defmodule Explorer.Chain.SmartContract.Proxy.EIP1967 do
         @storage_slot_logic_contract_address,
         json_rpc_named_arguments
       )
+
+    Logger.info(
+      "### implementation_address_hash_string_from_logic_storage_slot #{inspect(implementation_address_hash_string_from_logic_storage_slot)} ###"
+    )
 
     implementation_address_hash_string =
       if implementation_address_hash_string_from_logic_storage_slot &&

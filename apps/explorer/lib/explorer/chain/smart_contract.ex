@@ -585,6 +585,10 @@ defmodule Explorer.Chain.SmartContract do
       refetch_necessity_checked?: false
     }
 
+    if Mix.env() == :test do
+      Logger.info("### get_implementation call from compose_address_for_unverified_smart_contract")
+    end
+
     {implementation_address_hash, _} =
       Implementation.get_implementation(
         smart_contract,
@@ -609,6 +613,10 @@ defmodule Explorer.Chain.SmartContract do
   def compose_address_for_unverified_smart_contract(address_result, _hash, _options), do: address_result
 
   def single_implementation_smart_contract_from_proxy(proxy_hash, options) do
+    if Mix.env() == :test do
+      Logger.info("### get_implementation call from single_implementation_smart_contract_from_proxy")
+    end
+
     {implementation_address_hashes, _} = Implementation.get_implementation(proxy_hash, options)
 
     if implementation_address_hashes && Enum.count(implementation_address_hashes) == 1 do

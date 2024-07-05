@@ -1,6 +1,8 @@
 defmodule BlockScoutWeb.API.V2.AddressView do
   use BlockScoutWeb, :view
 
+  require Logger
+
   import BlockScoutWeb.Account.AuthController, only: [current_user: 1]
 
   alias BlockScoutWeb.AddressView
@@ -94,6 +96,10 @@ defmodule BlockScoutWeb.API.V2.AddressView do
       )
 
     is_proxy = AddressView.smart_contract_is_proxy?(address_with_smart_contract, @api_true)
+
+    if Mix.env() == :test do
+      Logger.info("### get_implementation call from prepare_address")
+    end
 
     implementations =
       with true <- is_proxy,

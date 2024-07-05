@@ -1173,6 +1173,10 @@ defmodule Explorer.Chain do
           else
             LookUpSmartContractSourcesOnDemand.trigger_fetch(address_result, nil)
 
+            if Mix.env() == :test do
+              Logger.info("### get_implementation call from find_contract_address")
+            end
+
             {implementation_address_hashes, _} =
               Implementation.get_implementation(
                 %{
