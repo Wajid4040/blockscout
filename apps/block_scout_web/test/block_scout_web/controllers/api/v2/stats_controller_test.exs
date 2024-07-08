@@ -37,18 +37,8 @@ defmodule BlockScoutWeb.API.V2.StatsControllerTest do
   end
 
   describe "/stats/charts/market" do
-    setup do
-      configuration = Application.get_env(:explorer, Explorer.ExchangeRates)
-      Application.put_env(:explorer, Explorer.ExchangeRates, enabled: false)
-
-      :ok
-
-      on_exit(fn ->
-        Application.put_env(:explorer, Explorer.ExchangeRates, configuration)
-      end)
-    end
-
     test "get empty data", %{conn: conn} do
+      IO.inspect("### Application.get_env(:explorer, __MODULE__)[:enabled] #{Application.get_env(:explorer, __MODULE__)[:enabled]} ###")
       request = get(conn, "/api/v2/stats/charts/market")
       assert response = json_response(request, 200)
 
