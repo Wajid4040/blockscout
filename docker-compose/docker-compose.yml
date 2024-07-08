@@ -41,9 +41,9 @@ services:
     links:
       - db:database
     environment:
-        ETHEREUM_JSONRPC_HTTP_URL: https://evm.globalnetwork.foundation/
-        ETHEREUM_JSONRPC_TRACE_URL: https://evm.globalnetwork.foundation/
-        ETHEREUM_JSONRPC_WS_URL: ws:////evm.globalnetwork.foundation/
+        ETHEREUM_JSONRPC_HTTP_URL: http://2.58.80.230:9944/
+        ETHEREUM_JSONRPC_TRACE_URL: http://2.58.80.230:9944/
+        ETHEREUM_JSONRPC_WS_URL: ws://2.58.80.230:9944/
         CHAIN_ID: '1013'
 
   visualizer:
